@@ -20,19 +20,34 @@
 
         <button @click="handleClick">Submit</button>
     </form>
+   
 
     <div class="grid-container">
         <div class="box-container" v-for="image in images">
-            <img class="images" :src="image.url">
+            <img @click="changeProperty" class="images" :src="image.url" v-bind:id="image.id">
             <p>{{image.title}}</p>
         </div>
     </div>
-
-
+    
+    <img-modal v-if="modal" v-bind:id="id"></img-modal>
+    
 </div>
+
+<script id="modal" type="text/x-template">
+    <div class="overlay">
+        <div>
+        <h1 >{{title}}</h1>
+        <p>{{description}}</p>
+        <img :src="url">
+        
+        <p>Uploaded by {{username}} at {{timestamp}}.</p> 
+        </div>
+    </div>
+</script>
 
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/components.js"></script>
     <script src="/js/script.js"></script>
 </body>
 </html>

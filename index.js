@@ -26,6 +26,7 @@ const uploader = multer({
     }
 });
 /////////////////////////////////////////////////////////////////////
+app.use(express.json());
 app.use(express.static("public"));
 
 let images = [];
@@ -62,6 +63,21 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
                     success: false
                 });
             }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
+
+app.get("/image", (req, res) => {
+    console.log("get image(one) route has been hit: ");
+    console.log(req.query.id);
+    let id = req.query.id;
+
+    db.getImage(id)
+        .then(response => {
+            console.log("response in get image: ", response.rows);
+            res.json(response.rows);
         })
         .catch(error => {
             console.log(error);

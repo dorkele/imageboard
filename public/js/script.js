@@ -4,15 +4,19 @@
     new Vue({
         el: "#main",
         data: {
+            id: "",
             images: [],
             title: "",
             description: "",
             username: "",
-            file: null
+            file: null,
+            modal: ""
         },
         mounted: function() {
             var self = this;
             axios.get("/images").then(function(response) {
+                console.log("response.data: ", response);
+
                 self.images = response.data;
             });
         },
@@ -42,6 +46,14 @@
                 console.log("handleChange is running");
                 console.log("file: ", e.target.files[0]);
                 this.file = e.target.files[0];
+            },
+            changeProperty: function(e) {
+                var self = this;
+                console.log("i clicked on an image");
+                console.log("e.target: ", e);
+                self.modal = e.target.src; ///moguce da je ovo too much
+                self.id = e.target.id;
+                console.log("this id", this.id);
             }
         }
     });

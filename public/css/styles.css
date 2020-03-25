@@ -8,6 +8,8 @@
 }
 
 .box-container {
+    height: 400px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,10 +18,12 @@
     margin-left: 20px;
     margin-right: 20px;
     padding: 5px 5px 0 5px;
+    overflow: hidden;
 }
 
 .images {
     height: 100%;
+
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
@@ -42,4 +46,14 @@
 
 .input-file + label:hover {
     color: red;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: lightcoral;
+    opacity: 50%;
 }
