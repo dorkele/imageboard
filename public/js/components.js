@@ -3,11 +3,15 @@ Vue.component("img-modal", {
     template: "#modal",
     data: function() {
         return {
+            /////ovdje mozda jos neke stvari mogu poslati kroz props
             title: "",
             url: "",
             description: "",
             username: "",
-            timestamp: ""
+            timestamp: "",
+            comment: "",
+            name: "",
+            comments: []
         };
     },
     mounted: function() {
@@ -28,13 +32,19 @@ Vue.component("img-modal", {
                 self.description = response.data[0].description;
                 self.username = response.data[0].username;
                 self.timestamp = response.data[0].created_at;
+                self.comments.unshift(response.data[0].comment);
             })
             .catch(function(error) {
                 console.log(error);
             });
+    },
+    methods: {
+        submitted: function(e) {
+            e.preventDefault();
+            console.log("submitted emitted");
+            console.log("this in submitted: ", this);
+            let commentArr = [this.id, this.comment, this.name];
+            this.$emit("submitted", commentArr);
+        }
     }
-});
-
-Vue.component("comment-form", {
-    template: "#form"
 });

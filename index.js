@@ -70,7 +70,7 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 });
 
 app.get("/image", (req, res) => {
-    console.log("get image(one) route has been hit: ");
+    console.log("get image(one) route has been hit: ", req.query.id);
     console.log(req.query.id);
     let id = req.query.id;
 
@@ -78,6 +78,21 @@ app.get("/image", (req, res) => {
         .then(response => {
             console.log("response in get image: ", response.rows);
             res.json(response.rows);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+});
+
+app.post("/submit", (req, res) => {
+    console.log("post submit route has been hit: ", req.body.params);
+    let imgId = req.body.params.imgId;
+    let comment = req.body.params.comment;
+    let username = req.body.params.name;
+    db.addComment(username, comment, imgId)
+        .then(() => {
+            /////ovdje negdje cu morati res.json odradivati
+            console.log("kometar je u tablici");
         })
         .catch(error => {
             console.log(error);

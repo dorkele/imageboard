@@ -54,6 +54,25 @@
                 self.modal = e.target.src; ///moguce da je ovo too much
                 self.id = e.target.id;
                 console.log("this id", this.id);
+            },
+            submitComment: function(commentArr) {
+                console.log("event je stigao do mene: ", this);
+                console.log(commentArr[0]);
+
+                axios
+                    .post("/submit", {
+                        params: {
+                            imgId: commentArr[0],
+                            comment: commentArr[1],
+                            name: commentArr[2]
+                        }
+                    })
+                    .then(function(response) {
+                        console.log("response from post submit: ", response);
+                    })
+                    .catch(function(error) {
+                        console.log("error in post submit: ", error);
+                    });
             }
         }
     });

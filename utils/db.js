@@ -17,7 +17,23 @@ module.exports.addImage = (title, description, username, url) => {
 
 module.exports.getImage = id => {
     const q = `SELECT * FROM images
+        LEFT OUTER JOIN comments ON images.id = img_id
         WHERE images.id=$1`;
     const params = [id];
+    return db.query(q, params);
+};
+
+module.exports.addComment = (username, comment, imgId) => {
+    const q = `INSERT INTO comments (username, comment, img_id)
+    VALUES ($1, $2, $3)
+    RETURNING *`;
+    const params = [username, comment, imgId];
+    return db.query(q, params);
+};
+
+module.exports.getComments = imgId => {
+    const q = `SELECT * FROM comments
+    WHERE comments.id=$1`;
+    const params = [imgId];
     return db.query(q, params);
 };

@@ -29,7 +29,7 @@
         </div>
     </div>
     
-    <img-modal v-if="modal" v-bind:id="id"></img-modal>
+    <img-modal v-if="modal" v-bind:id="id" @submitted="submitComment"></img-modal>
     
 </div>
 
@@ -40,19 +40,24 @@
         <p>{{description}}</p>
         <p>Uploaded by {{username}} on {{timestamp}}.</p> 
         <img :src="url">
-        <comment-form></comment-form>
         
         </div>
+        <form>
+    
+        <p>Comment</p>
+        <input v-model="comment" type="text" name="comment" >
+        <p>Username</p>
+        <input v-model="name" type="text" name="name" >
+        <button @click="submitted">Leave Comment</button>
+    
+        </form>
+
+        <div v-for="comment in comments">
+            <p>Comment by {{comment.name}} on {{comment.timestamp}}</p>
+            <!-- change timestamps everywhere -->
+            <p>{{comment}}</p>
+        </div>
     </div>
-</script>
-<script id="form" type="text/x-template">
-    <div>
-    <p>Comment</p>
-    <input type="text">
-    <p>Username</p>
-    <input type="text">
-    <button>Submit</button>
-</div>
 </script>
 
     <script src="/js/vue.js"></script>
