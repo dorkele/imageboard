@@ -27,10 +27,14 @@ Vue.component("img-modal", {
                 self.url = response.data[0].url;
                 self.description = response.data[0].description;
                 self.username = response.data[0].username;
-                self.timestamp = response.data[0].timestamp;
+                self.timestamp = response.data[0].created_at;
             })
             .catch(function(error) {
                 console.log(error);
             });
     }
+});
+
+Vue.component("comment-form", {
+    template: "#form"
 });
