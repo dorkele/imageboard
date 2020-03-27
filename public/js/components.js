@@ -46,6 +46,11 @@ Vue.component("img-modal", {
             console.log("this in submitted: ", this);
             let commentArr = [this.id, this.comment, this.name];
             this.$emit("submitted", commentArr);
+        },
+        close: function() {
+            console.log("clicked on x");
+
+            this.$emit("close");
         }
     }
 });

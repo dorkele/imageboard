@@ -33,12 +33,14 @@
     v-bind:id="id" 
     @submitted="submitComment"
     v-bind:comment="comment"
+    @close="closeModal"
     ></img-modal>
     
 </div>
 
 <script id="modal" type="text/x-template">
     <div class="overlay">
+        <div @click="close">X</div>
         <div>
         <h1 >{{title}}</h1>
         <p>{{description}}</p>

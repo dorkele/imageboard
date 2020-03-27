@@ -75,6 +75,12 @@
                     .catch(function(error) {
                         console.log("error in post submit: ", error);
                     });
+            },
+            closeModal: function() {
+                console.log("closemodal je dosao do mene");
+                var self = this;
+                self.modal = null;
+                self.id = null;
             }
         }
     });
