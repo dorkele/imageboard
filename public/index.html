@@ -23,13 +23,17 @@
    
 
     <div class="grid-container">
+        
         <div class="box-container" v-for="image in images">
-            <img @click="changeProperty" class="images" :src="image.url" v-bind:id="image.id">
+            <a :href="'#' + image.id"></a>
+            <img class="images" :src="image.url" v-bind:id="image.id">
             <p>{{image.title}}</p>
+            </a>
         </div>
+        
     </div>
     
-    <img-modal v-if="modal" 
+    <img-modal v-if="currentId" 
     v-bind:id="id" 
     @submitted="submitComment"
     v-bind:comment="comment"

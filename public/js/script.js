@@ -10,7 +10,7 @@
             description: "",
             username: "",
             file: null,
-            modal: "",
+            currentId: location.hash.slice(1),
             comment: null,
             more: "here"
         },
@@ -21,6 +21,7 @@
 
                 self.images = response.data;
             });
+            console.log("location.hash: ", location.hash.slice(1));
         },
         methods: {
             handleClick: function(e) {
@@ -53,9 +54,10 @@
                 var self = this;
                 console.log("i clicked on an image");
                 console.log("e.target: ", e);
-                self.modal = e.target.src; ///moguce da je ovo too much
+                //self.modal = e.target.src; ///moguce da je ovo too much
+                self.currentId = e.target.id;
                 self.id = e.target.id;
-                console.log("this id", this.id);
+                console.log("this id", self.currentId);
             },
             submitComment: function(commentArr) {
                 console.log("event je stigao do mene: ", this);
@@ -80,8 +82,8 @@
             closeModal: function() {
                 console.log("closemodal je dosao do mene");
                 var self = this;
-                self.modal = null;
-                self.id = null;
+
+                self.currentId = null;
             },
             moreClick: function() {
                 console.log("more button was clicked");

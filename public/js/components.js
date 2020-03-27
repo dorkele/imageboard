@@ -15,7 +15,7 @@ Vue.component("img-modal", {
     },
     mounted: function() {
         var self = this;
-        console.log("self.id u mounted: ", self.id);
+        console.log("this u mounted: ", this);
 
         axios
             .get("/image", {
