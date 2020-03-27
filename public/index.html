@@ -29,7 +29,11 @@
         </div>
     </div>
     
-    <img-modal v-if="modal" v-bind:id="id" @submitted="submitComment"></img-modal>
+    <img-modal v-if="modal" 
+    v-bind:id="id" 
+    @submitted="submitComment"
+    v-bind:comment="comment"
+    ></img-modal>
     
 </div>
 
@@ -52,8 +56,13 @@
     
         </form>
 
-        <div v-for="comment in comments">
-            <p>Comment by {{comment.name}} on {{comment.timestamp}}</p>
+        <div v-for="comment in comments" >
+            <p>Comment by {{username}} on </p>
+            <!-- change timestamps everywhere -->
+            <p>{{comment}}</p>
+        </div>
+        <div v-if="comment">
+            <p>Comment by {{username}} on </p>
             <!-- change timestamps everywhere -->
             <p>{{comment}}</p>
         </div>

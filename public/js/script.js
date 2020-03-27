@@ -10,7 +10,8 @@
             description: "",
             username: "",
             file: null,
-            modal: ""
+            modal: "",
+            comment: null
         },
         mounted: function() {
             var self = this;
@@ -58,7 +59,7 @@
             submitComment: function(commentArr) {
                 console.log("event je stigao do mene: ", this);
                 console.log(commentArr[0]);
-
+                var self = this;
                 axios
                     .post("/submit", {
                         params: {
@@ -69,6 +70,7 @@
                     })
                     .then(function(response) {
                         console.log("response from post submit: ", response);
+                        self.comment.push(response.data[0]);
                     })
                     .catch(function(error) {
                         console.log("error in post submit: ", error);

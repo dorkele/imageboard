@@ -30,6 +30,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 let images = [];
+let comments = [];
 
 app.get("/images", (req, res) => {
     console.log("/images route has been hit");
@@ -90,9 +91,12 @@ app.post("/submit", (req, res) => {
     let comment = req.body.params.comment;
     let username = req.body.params.name;
     db.addComment(username, comment, imgId)
-        .then(() => {
+        .then(response => {
+            console.log("response in post comment submit: ", response.rows);
+
             /////ovdje negdje cu morati res.json odradivati
             console.log("kometar je u tablici");
+            res.json(response.rows);
         })
         .catch(error => {
             console.log(error);

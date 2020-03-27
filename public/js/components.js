@@ -1,5 +1,5 @@
 Vue.component("img-modal", {
-    props: ["id"],
+    props: ["id", "comment"],
     template: "#modal",
     data: function() {
         return {
@@ -9,30 +9,31 @@ Vue.component("img-modal", {
             description: "",
             username: "",
             timestamp: "",
-            comment: "",
-            name: "",
-            comments: []
+            comments: [],
+            name: ""
         };
     },
     mounted: function() {
         var self = this;
+        console.log("self.id u mounted: ", self.id);
+
         axios
-            .get("/image/", {
+            .get("/image", {
                 params: {
                     id: self.id
                 }
             })
             .then(function(response) {
-                console.log(
-                    "response from mounted component: ",
-                    response.data[0]
-                );
+                console.log("response from mounted component: ", response.data);
                 self.title = response.data[0].title;
                 self.url = response.data[0].url;
                 self.description = response.data[0].description;
                 self.username = response.data[0].username;
-                self.timestamp = response.data[0].created_at;
-                self.comments.unshift(response.data[0].comment);
+                //self.timestamp = response.data[0].created_at;
+                for (let i = 0; i < response.data.length; i++) {
+                    self.comments.push(response.data[i].comment);
+                }
+                //self.comments.unshift(response.data[0].comment);
             })
             .catch(function(error) {
                 console.log(error);

@@ -17,8 +17,9 @@ module.exports.addImage = (title, description, username, url) => {
 
 module.exports.getImage = id => {
     const q = `SELECT * FROM images
-        LEFT OUTER JOIN comments ON images.id = img_id
-        WHERE images.id=$1`;
+    JOIN comments ON img_id = images.id
+    WHERE images.id=$1
+    `;
     const params = [id];
     return db.query(q, params);
 };
@@ -33,7 +34,7 @@ module.exports.addComment = (username, comment, imgId) => {
 
 module.exports.getComments = imgId => {
     const q = `SELECT * FROM comments
-    WHERE comments.id=$1`;
+    WHERE img_id=$1`;
     const params = [imgId];
     return db.query(q, params);
 };
