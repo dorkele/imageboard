@@ -36,7 +36,7 @@
     @close="closeModal"
     ></img-modal>
     
-    <button @click="moreClick">More</button>
+    <button v-if="more" @click="moreClick">More</button>
 </div>
 
 <script id="modal" type="text/x-template">

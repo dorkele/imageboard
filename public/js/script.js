@@ -11,7 +11,8 @@
             username: "",
             file: null,
             modal: "",
-            comment: null
+            comment: null,
+            more: "here"
         },
         mounted: function() {
             var self = this;
@@ -86,8 +87,8 @@
                 console.log("more button was clicked");
                 console.log("self.images: ", this.images);
                 var self = this;
-                let i = self.images.length - 1;
-                let lastId = self.images[i].id;
+                var i = self.images.length - 1;
+                var lastId = self.images[i].id;
 
                 console.log("last.id: ", lastId);
                 axios
@@ -98,9 +99,20 @@
                     })
                     .then(function(response) {
                         console.log("response in next: ", response.data);
-                        for (let i = 0; i < response.data.length; i++) {
+                        for (var i = 0; i < response.data.length; i++) {
                             self.images.push(response.data[i]);
+                            console.log("more related: ", response.data[i].id);
+                            console.log(
+                                "other more related: ",
+                                response.data[0].lastId
+                            );
+
                             lastId = response.data[0].lastId;
+                            if (
+                                response.data[i].lastId == response.data[i].id
+                            ) {
+                                self.more = null;
+                            }
                         }
                     })
                     .catch(function(error) {
