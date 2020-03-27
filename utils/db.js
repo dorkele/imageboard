@@ -3,7 +3,8 @@ const db = spicedPg("postgres:postgres:postgres@localhost:5432/image-board");
 
 module.exports.getImages = () => {
     const q = `SELECT * FROM images
-    ORDER BY id DESC`;
+    ORDER BY id DESC
+    LIMIT 3`;
     return db.query(q);
 };
 
@@ -32,9 +33,22 @@ module.exports.addComment = (username, comment, imgId) => {
     return db.query(q, params);
 };
 
-module.exports.getComments = imgId => {
-    const q = `SELECT * FROM comments
-    WHERE img_id=$1`;
-    const params = [imgId];
+// module.exports.getComments = imgId => {
+//     const q = `SELECT * FROM comments
+//     WHERE img_id=$1`;
+//     const params = [imgId];
+//     return db.query(q, params);
+// };
+
+module.exports.nextImages = lastId => {
+    const q = `SELECT url, title, id, (
+                    SELECT id FROM images
+                    ORDER BY id ASC
+                    LIMIT 1
+                ) AS "lastId" FROM images
+                WHERE id < $1
+                ORDER BY id DESC
+                LIMIT 3`;
+    const params = [lastId];
     return db.query(q, params);
 };

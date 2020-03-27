@@ -81,6 +81,31 @@
                 var self = this;
                 self.modal = null;
                 self.id = null;
+            },
+            moreClick: function() {
+                console.log("more button was clicked");
+                console.log("self.images: ", this.images);
+                var self = this;
+                let i = self.images.length - 1;
+                let lastId = self.images[i].id;
+
+                console.log("last.id: ", lastId);
+                axios
+                    .get("/next", {
+                        params: {
+                            lastId: self.images[i].id
+                        }
+                    })
+                    .then(function(response) {
+                        console.log("response in next: ", response.data);
+                        for (let i = 0; i < response.data.length; i++) {
+                            self.images.push(response.data[i]);
+                            lastId = response.data[0].lastId;
+                        }
+                    })
+                    .catch(function(error) {
+                        console.log("error in next: ", error);
+                    });
             }
         }
     });

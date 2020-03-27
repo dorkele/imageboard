@@ -103,4 +103,17 @@ app.post("/submit", (req, res) => {
         });
 });
 
+app.get("/next", (req, res) => {
+    console.log("get next route has been hit: ", req.query);
+    let lastId = req.query.lastId;
+    db.nextImages(lastId)
+        .then(response => {
+            console.log("response u nextImages: ", response.rows);
+            res.json(response.rows);
+        })
+        .catch(error => {
+            console.log("error u nextImages: ", error);
+        });
+});
+
 app.listen(8080, () => console.log("IB server is listening..."));

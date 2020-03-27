@@ -36,6 +36,7 @@
     @close="closeModal"
     ></img-modal>
     
+    <button @click="moreClick">More</button>
 </div>
 
 <script id="modal" type="text/x-template">
@@ -58,7 +59,7 @@
     
         </form>
 
-        <div v-for="comment in comments" >
+        <div v-if="comments" v-for="comment in comments" >
             <p>Comment by {{username}} on </p>
             <!-- change timestamps everywhere -->
             <p>{{comment}}</p>
