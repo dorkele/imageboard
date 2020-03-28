@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
     <title>My Imageboard</title>
 </head>
 <body>
-    <h1>My Imageboard</h1>
-    <h2>Latest</h2>
+    <div id="title">Can You Sea Me?<div>
 
 <div id="main">
 
@@ -26,8 +26,8 @@
         
         <div class="box-container" v-for="image in images">
             <a :href="'#' + image.id">
-            <img class="images" :src="image.url" v-bind:id="image.id">
-            <p>{{image.title}}</p>
+            <div class="img-container"><img class="images" :src="image.url" v-bind:id="image.id"></div>
+            <div><p id="img-title">{{image.title}}</p></div>
             </a>
         </div>
         
@@ -46,7 +46,7 @@
     <div class="overlay">
         <div @click="close">X</div>
         <div>
-        <h1 >{{title}}</h1>
+        <h1>{{title}}</h1>
         <p>{{description}}</p>
         <p>Uploaded by {{username}} on {{timestamp}}.</p> 
         <img :src="url" v-bind:id="id">

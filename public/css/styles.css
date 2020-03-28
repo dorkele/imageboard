@@ -1,32 +1,20 @@
 * {
     background-color: white;
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+#main {
+    padding-left: 15%;
 }
 
-.box-container {
-    height: 400px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: lawngreen solid 1px;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding: 5px 5px 0 5px;
-    overflow: hidden;
+#title {
+    font-size: 30px;
 }
 
-.images {
-    height: 100%;
-
-    width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
+#wave-emoji {
+    height: 30px;
+    width: 30px;
 }
 
 .input-file {
@@ -39,13 +27,47 @@
 }
 
 .input-file + label {
-    background-color: lightcoral;
-    color: white;
     cursor: pointer;
 }
 
 .input-file + label:hover {
     color: red;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.box-container {
+    height: 350px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.img-container {
+    height: 300px;
+    width: 300px;
+}
+
+.images {
+    align-self: center;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 .overlay {
@@ -54,5 +76,4 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: lightcoral;
 }
