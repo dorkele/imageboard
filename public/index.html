@@ -25,7 +25,7 @@
     <div class="grid-container">
         
         <div class="box-container" v-for="image in images">
-            <a :href="'#' + image.id"></a>
+            <a :href="'#' + image.id">
             <img class="images" :src="image.url" v-bind:id="image.id">
             <p>{{image.title}}</p>
             </a>
@@ -33,10 +33,9 @@
         
     </div>
     
-    <img-modal v-if="currentId" 
-    v-bind:id="id" 
+    <img-modal v-if="id" 
+    v-bind:id="id"
     @submitted="submitComment"
-    v-bind:comment="comment"
     @close="closeModal"
     ></img-modal>
     
@@ -50,7 +49,7 @@
         <h1 >{{title}}</h1>
         <p>{{description}}</p>
         <p>Uploaded by {{username}} on {{timestamp}}.</p> 
-        <img :src="url">
+        <img :src="url" v-bind:id="id">
         
         </div>
         <form>
