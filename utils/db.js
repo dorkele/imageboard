@@ -17,10 +17,19 @@ module.exports.addImage = (title, description, username, url) => {
 };
 
 module.exports.getImage = id => {
-    const q = `SELECT * FROM images
-    LEFT OUTER JOIN comments ON img_id = images.id
-    WHERE images.id=$1
-    `;
+    const q = `SELECT *, (
+        SELECT id FROM images
+        WHERE images.id > $1
+        LIMIT 1
+        ) AS "previousId", (
+            SELECT id FROM images
+            WHERE images.id < $1
+            LIMIT 1
+        ) AS "nextId"
+        FROM images
+        LEFT OUTER JOIN comments ON img_id = images.id
+        WHERE images.id=$1
+        `;
     const params = [id];
     return db.query(q, params);
 };

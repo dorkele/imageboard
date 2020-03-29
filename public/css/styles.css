@@ -131,11 +131,22 @@ a {
     align-items: center;
 }
 
+.img-arr {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .image {
     max-height: 100%;
     max-width: 100%;
     height: auto;
     width: auto;
+}
+
+.arrows {
+    font-size: 100px;
 }
 
 #wave-emoji {

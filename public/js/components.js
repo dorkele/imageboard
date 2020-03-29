@@ -9,7 +9,10 @@ Vue.component("img-modal", {
             username: "",
             timestamp: "",
             comments: [],
-            name: ""
+            name: "",
+            count: 0,
+            previousId: "",
+            nextId: ""
         };
     },
     mounted: function() {
@@ -30,8 +33,19 @@ Vue.component("img-modal", {
                 self.description = response.data[0].description;
                 self.username = response.data[0].username;
                 //self.timestamp = response.data[0].created_at;
+                //self.count = response.data[0].count;
                 for (let i = 0; i < response.data.length; i++) {
                     self.comments.push(response.data[i].comment);
+                }
+                if (response.data[0].nextId) {
+                    self.nextId = response.data[0].nextId;
+                } else {
+                    self.nextId = "";
+                }
+                if (response.data[0].previousId) {
+                    self.previousId = response.data[0].previousId;
+                } else {
+                    self.previousId = "";
                 }
                 //self.comments.unshift(response.data[0].comment);
             })
@@ -63,6 +77,16 @@ Vue.component("img-modal", {
                         self.comments.push(response.data[i].comment);
                     }
                     //self.comments.unshift(response.data[0].comment);
+                    if (response.data[0].nextId) {
+                        self.nextId = response.data[0].nextId;
+                    } else {
+                        self.nextId = "";
+                    }
+                    if (response.data[0].previousId) {
+                        self.previousId = response.data[0].previousId;
+                    } else {
+                        self.previousId = "";
+                    }
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -79,13 +103,24 @@ Vue.component("img-modal", {
         },
         close: function() {
             console.log("clicked on x");
-
             this.$emit("close");
         },
         del: function() {
             console.log("emit delete");
             let id = this.id;
             this.$emit("del", id);
+        },
+        next: function() {
+            console.log("i clicked next");
+            location.hash = this.nextId;
+            console.log("this.nextId: ", this.nextId);
+        },
+        previous: function() {
+            console.log("i clicked previous");
+            location.hash = this.previousId;
         }
+        // count: function() {
+        //     self.count++;
+        // }
     }
 });

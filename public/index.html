@@ -51,10 +51,13 @@
         <div class="modal-box-cont">
             <div class="modal-img-cont">
                 <h1>{{title}}</h1>
+                <div class="img-arr"><div v-if="previousId" class="arrows" @click="previous"><</div>
                 <img class="image" :src="url" v-bind:id="id">
+                <div v-if="nextId" class="arrows" @click="next">></div></div>
+                
             </div>
             <p class="img-upload">
-                <img id="wave-emoji" src="wave-emoji.png">
+                <p @click="count++"><img id="wave-emoji" src="wave-emoji.png"> {{count}}</p>
                 Uploaded by {{username}} on {{timestamp}}.
                 <img @click="del" id="delete" src="delete.png">
             </p> 
@@ -68,16 +71,16 @@
                     
                 </form>
                 
-                <!-- <div class="comments" v-if="comments" v-for="comment in comments" >
-                    <p>Comment by name on </p>
-                     change timestamps everywhere 
-                    <p>comment</p>
+                <div class="comments" v-if="comments" v-for="comment in comments" >
+                    <p>Comment by {{name}} on </p>
+                     <!-- change timestamps everywhere  -->
+                    <p>{{comment}}</p>
                 </div>
                 <div class="comments" v-if="comment">
-                    <p>Comment by name on </p>
-                     change timestamps everywhere
-                    <p>comment</p>
-                </div> -->
+                    <p>Comment by {{name}} on </p>
+                     <!-- change timestamps everywhere -->
+                    <p>{{comment}}</p>
+                </div>
         </div>    
     </div>
     
