@@ -116,4 +116,17 @@ app.get("/next", (req, res) => {
         });
 });
 
+app.delete("/image", (req, res) => {
+    console.log("post?? delete route has been hit: ", req.body.id);
+    let id = req.body.id;
+    db.deleteImage(id)
+        .then(response => {
+            console.log("i believe image is deleted: ", response);
+            res.json(response);
+        })
+        .catch(error => {
+            console.log("error u delete image: ", error);
+        });
+});
+
 app.listen(8080, () => console.log("IB server is listening..."));

@@ -26,19 +26,12 @@ module.exports.getImage = id => {
 };
 
 module.exports.addComment = (username, comment, imgId) => {
-    const q = `INSERT INTO comments (username, comment, img_id)
+    const q = `INSERT INTO comments (name, comment, img_id)
     VALUES ($1, $2, $3)
     RETURNING *`;
     const params = [username, comment, imgId];
     return db.query(q, params);
 };
-
-// module.exports.getComments = imgId => {
-//     const q = `SELECT * FROM comments
-//     WHERE img_id=$1`;
-//     const params = [imgId];
-//     return db.query(q, params);
-// };
 
 module.exports.nextImages = lastId => {
     const q = `SELECT url, title, id, (
@@ -50,5 +43,12 @@ module.exports.nextImages = lastId => {
                 ORDER BY id DESC
                 LIMIT 3`;
     const params = [lastId];
+    return db.query(q, params);
+};
+
+module.exports.deleteImage = id => {
+    const q = `DELETE FROM images
+    WHERE id=$1`;
+    const params = [id];
     return db.query(q, params);
 };

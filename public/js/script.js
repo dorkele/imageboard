@@ -90,8 +90,6 @@
             },
             closeModal: function() {
                 console.log("closemodal je dosao do mene");
-                var self = this;
-
                 location.hash = "";
             },
             moreClick: function() {
@@ -128,6 +126,29 @@
                     })
                     .catch(function(error) {
                         console.log("error in next: ", error);
+                    });
+            },
+            deleteImage: function(id) {
+                console.log("tu sam u delete image i gledam imam li id: ", id);
+                var self = this;
+                axios
+                    .delete("/image", {
+                        data: {
+                            id: id
+                        }
+                    })
+                    .then(function() {
+                        console.log("image should be deleted: ");
+                        location.hash = "";
+                        console.log("images array: ", self.images);
+                        for (var i = 0; i < self.images.length; i++) {
+                            if (self.images[i].id == id) {
+                                self.images.splice(i, 1);
+                            }
+                        }
+                    })
+                    .catch(function(error) {
+                        console.log(error);
                     });
             }
         }

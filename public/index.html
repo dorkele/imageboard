@@ -6,11 +6,12 @@
     <title>My Imageboard</title>
 </head>
 <body>
-    <div id="title">Can You Sea Me?<div>
-
+    <div id="nav">
+    <div id="title">Can You Sea Me?</div><img id="logo" src="wave-bw.jpg">
+    </div>
 <div id="main">
 
-    <form>
+    <form id="img-form">
         <input v-model="title" type="text" name="title" placeholder="title">
         <input v-model="description" type="text" name="description" placeholder="description">
         <input v-model="username" type="text" name="username" placeholder="username">
@@ -27,7 +28,7 @@
         <div class="box-container" v-for="image in images">
             <a :href="'#' + image.id">
             <div class="img-container"><img class="images" :src="image.url" v-bind:id="image.id"></div>
-            <div><p id="img-title">{{image.title}}</p></div>
+            <div><p class="img-title">{{image.title}}</p></div>
             </a>
         </div>
         
@@ -37,6 +38,7 @@
     v-bind:id="id"
     @submitted="submitComment"
     @close="closeModal"
+    @del="deleteImage"
     ></img-modal>
     
     <button v-if="more" @click="moreClick">More</button>
@@ -44,35 +46,41 @@
 
 <script id="modal" type="text/x-template">
     <div class="overlay">
-        <div @click="close">X</div>
-        <div>
-        <h1>{{title}}</h1>
-        <p>{{description}}</p>
-        <p>Uploaded by {{username}} on {{timestamp}}.</p> 
-        <img :src="url" v-bind:id="id">
-        
-        </div>
-        <form>
-    
-        <p>Comment</p>
-        <input v-model="comment" type="text" name="comment" >
-        <p>Username</p>
-        <input v-model="name" type="text" name="name" >
-        <button @click="submitted">Leave Comment</button>
-    
-        </form>
 
-        <div v-if="comments" v-for="comment in comments" >
-            <p>Comment by {{username}} on </p>
-            <!-- change timestamps everywhere -->
-            <p>{{comment}}</p>
-        </div>
-        <div v-if="comment">
-            <p>Comment by {{username}} on </p>
-            <!-- change timestamps everywhere -->
-            <p>{{comment}}</p>
-        </div>
+        <div id="close" @click="close">X</div>
+        <div class="modal-box-cont">
+            <div class="modal-img-cont">
+                <h1>{{title}}</h1>
+                <img class="image" :src="url" v-bind:id="id">
+            </div>
+            <p class="img-upload">
+                <img id="wave-emoji" src="wave-emoji.png">
+                Uploaded by {{username}} on {{timestamp}}.
+                <img @click="del" id="delete" src="delete.png">
+            </p> 
+            <p id="description">{{description}}</p>
+                <form id="comment-form">
+                    <p>Comment</p>
+                    <input v-model="comment" type="text" name="comment" >
+                    <p>Username</p>
+                    <input v-model="name" type="text" name="name" >
+                    <button @click="submitted">Leave Comment</button>
+                    
+                </form>
+                
+                <!-- <div class="comments" v-if="comments" v-for="comment in comments" >
+                    <p>Comment by name on </p>
+                     change timestamps everywhere 
+                    <p>comment</p>
+                </div>
+                <div class="comments" v-if="comment">
+                    <p>Comment by name on </p>
+                     change timestamps everywhere
+                    <p>comment</p>
+                </div> -->
+        </div>    
     </div>
+    
 </script>
 
     <script src="/js/vue.js"></script>

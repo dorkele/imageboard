@@ -81,6 +81,11 @@ Vue.component("img-modal", {
             console.log("clicked on x");
 
             this.$emit("close");
+        },
+        del: function() {
+            console.log("emit delete");
+            let id = this.id;
+            this.$emit("del", id);
         }
     }
 });
