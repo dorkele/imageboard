@@ -29,10 +29,34 @@ body {
 }
 
 #img-form {
-    margin: 50px 0;
+    margin: 30px 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
+    align-items: center;
+}
+
+.first-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.black-border {
+    border: 1px black solid;
+}
+
+.second {
+    height: 40px;
+    width: 200px;
+}
+
+.scnd-row {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .input-file {
@@ -46,10 +70,18 @@ body {
 
 .input-file + label {
     cursor: pointer;
+    text-align: center;
+    padding-top: 10px;
 }
 
 .input-file + label:hover {
     color: red;
+}
+
+.botun {
+    font-size: 16px;
+    color: white;
+    background-color: black;
 }
 
 .grid-container {
@@ -71,7 +103,7 @@ body {
 .img-container {
     height: 300px;
     width: 100%;
-    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5); */
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 }
 
@@ -91,6 +123,16 @@ body {
 a {
     text-decoration: none;
     color: black;
+}
+
+#more {
+    display: flex;
+    justify-content: center;
+}
+
+.more {
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .overlay {
@@ -124,7 +166,7 @@ a {
 }
 
 .modal-img-cont {
-    height: 500px;
+    max-height: 100%;
     width: 500px;
     display: flex;
     flex-direction: column;
@@ -136,6 +178,11 @@ a {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.title {
+    padding-top: 20px;
+    font-size: 40px;
 }
 
 .image {
@@ -158,20 +205,44 @@ a {
     font-size: 12px;
 }
 
+.icons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+
 #delete {
     height: 30px;
 }
 
+.description {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 #description {
     width: 500px;
+    text-align: center;
 }
 
 #comment-form {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     width: 100%;
 }
 
 .comments {
     width: 100%;
+}
+
+footer {
+    border-top: 1px solid black;
+    height: 30px;
+    padding-top: 5px;
+    padding-left: 30px;
 }

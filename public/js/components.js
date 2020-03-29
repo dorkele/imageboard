@@ -9,10 +9,11 @@ Vue.component("img-modal", {
             username: "",
             timestamp: "",
             comments: [],
-            name: "",
             count: 0,
             previousId: "",
-            nextId: ""
+            nextId: "",
+            comment: "",
+            name: ""
         };
     },
     mounted: function() {
@@ -32,6 +33,7 @@ Vue.component("img-modal", {
                 self.url = response.data[0].url;
                 self.description = response.data[0].description;
                 self.username = response.data[0].username;
+                self.name = response.data[0].name;
                 //self.timestamp = response.data[0].created_at;
                 //self.count = response.data[0].count;
                 for (let i = 0; i < response.data.length; i++) {
@@ -47,7 +49,6 @@ Vue.component("img-modal", {
                 } else {
                     self.previousId = "";
                 }
-                //self.comments.unshift(response.data[0].comment);
             })
             .catch(function(error) {
                 console.log(error);
@@ -72,11 +73,11 @@ Vue.component("img-modal", {
                     self.url = response.data[0].url;
                     self.description = response.data[0].description;
                     self.username = response.data[0].username;
+                    self.name = response.data[0].name;
                     //self.timestamp = response.data[0].created_at;
                     for (let i = 0; i < response.data.length; i++) {
                         self.comments.push(response.data[i].comment);
                     }
-                    //self.comments.unshift(response.data[0].comment);
                     if (response.data[0].nextId) {
                         self.nextId = response.data[0].nextId;
                     } else {
@@ -100,6 +101,7 @@ Vue.component("img-modal", {
             console.log("this in submitted: ", this);
             let commentArr = [this.id, this.comment, this.name];
             this.$emit("submitted", commentArr);
+            self.comment = this.comment;
         },
         close: function() {
             console.log("clicked on x");

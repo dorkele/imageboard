@@ -12,14 +12,18 @@
 <div id="main">
 
     <form id="img-form">
-        <input v-model="title" type="text" name="title" placeholder="title">
-        <input v-model="description" type="text" name="description" placeholder="description">
-        <input v-model="username" type="text" name="username" placeholder="username">
-       
+        <div class="first-row">
+        <input class="black-border"  v-model="title" type="text" name="title" placeholder="title">
+        <textarea class="black-border" v-model="description" id="description" type="text" name="description" placeholder="description">
+        </textarea>
+        <input class="black-border" v-model="username" type="text" name="username" placeholder="username">
+        </div>
+        <div class="scnd-row">
         <input @change="handleChange" type="file" name="file" id="file" class="input-file" accept="image/*">
-        <label for="file">Choose a file</label>
+        <label class="black-border second" for="file">Choose a file</label>
 
-        <button @click="handleClick">Submit</button>
+        <button class="black-border second botun" @click="handleClick">Submit</button>
+        </div>
     </form>
    
 
@@ -41,8 +45,13 @@
     @del="deleteImage"
     ></img-modal>
     
-    <button v-if="more" @click="moreClick">More</button>
+    <div id="more">
+    <button v-if="more" @click="moreClick" class="black-border second botun more">More</button>
+    </div>
 </div>
+<footer>
+    &copy DT 2020
+</footer>
 
 <script id="modal" type="text/x-template">
     <div class="overlay">
@@ -50,18 +59,22 @@
         <div id="close" @click="close">X</div>
         <div class="modal-box-cont">
             <div class="modal-img-cont">
-                <h1>{{title}}</h1>
+                <div class="title">{{title}}</div>
+                <p class="img-upload"> Uploaded by {{username}} on {{timestamp}}. </p>
                 <div class="img-arr"><div v-if="previousId" class="arrows" @click="previous"><</div>
                 <img class="image" :src="url" v-bind:id="id">
                 <div v-if="nextId" class="arrows" @click="next">></div></div>
-                
             </div>
-            <p class="img-upload">
-                <p @click="count++"><img id="wave-emoji" src="wave-emoji.png"> {{count}}</p>
-                Uploaded by {{username}} on {{timestamp}}.
-                <img @click="del" id="delete" src="delete.png">
-            </p> 
-            <p id="description">{{description}}</p>
+                
+                <div class="icons">
+                    <p ><img @click="count++" id="wave-emoji" src="wave-emoji.png"> {{count}}</p>
+                    <img @click="del" id="delete" src="delete.png">
+                </div> 
+                <div class="description">
+                <p id="description">{{description}}</p>
+                </div>
+
+
                 <form id="comment-form">
                     <p>Comment</p>
                     <input v-model="comment" type="text" name="comment" >
@@ -71,14 +84,12 @@
                     
                 </form>
                 
-                <div class="comments" v-if="comments" v-for="comment in comments" >
-                    <p>Comment by {{name}} on </p>
-                     <!-- change timestamps everywhere  -->
+                <div class="comments" v-for="comment in comments" >
+                    <p>Comment bla bla by {{name}} on </p>
                     <p>{{comment}}</p>
                 </div>
                 <div class="comments" v-if="comment">
                     <p>Comment by {{name}} on </p>
-                     <!-- change timestamps everywhere -->
                     <p>{{comment}}</p>
                 </div>
         </div>    

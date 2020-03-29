@@ -22,12 +22,7 @@
             });
             console.log("location.hash: ", location.hash.slice(1));
             window.addEventListener("hashchange", function() {
-                //var self = this;
-                // console.log("event hashchange: ", e);
                 console.log("location.hash: ", location.hash);
-                //self.currentId = location.hash.slice(1);
-                // console.log("self.currentId: ", self.currentId);
-
                 self.id = location.hash.slice(1);
                 console.log("self.id: ", self.id);
             });
@@ -53,21 +48,14 @@
                     .catch(function(error) {
                         console.log("error in post upload: ", error);
                     });
+                console.log(e);
+                e.target.form.reset();
             },
             handleChange: function(e) {
                 console.log("handleChange is running");
                 console.log("file: ", e.target.files[0]);
                 this.file = e.target.files[0];
             },
-            //changeProperty: function(e) {
-            //var self = this;
-            //console.log("i clicked on an image");
-            //console.log("e.target: ", e);
-            //self.modal = e.target.src; ///moguce da je ovo too much
-            // self.currentId = e.target.id;
-            // self.id = e.target.id;
-            //console.log("this id", self.currentId);
-            //},
             submitComment: function(commentArr) {
                 console.log("event je stigao do mene: ", this);
                 console.log(commentArr[0]);
@@ -82,7 +70,7 @@
                     })
                     .then(function(response) {
                         console.log("response from post submit: ", response);
-                        self.comment.push(response.data[0]);
+                        self.comment = response.data[0];
                     })
                     .catch(function(error) {
                         console.log("error in post submit: ", error);
