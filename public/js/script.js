@@ -10,7 +10,6 @@
             description: "",
             username: "",
             file: null,
-            comment: null,
             more: "here"
         },
         mounted: function() {
@@ -55,26 +54,6 @@
                 console.log("handleChange is running");
                 console.log("file: ", e.target.files[0]);
                 this.file = e.target.files[0];
-            },
-            submitComment: function(commentArr) {
-                console.log("event je stigao do mene: ", this);
-                console.log(commentArr[0]);
-                var self = this;
-                axios
-                    .post("/submit", {
-                        params: {
-                            imgId: commentArr[0],
-                            comment: commentArr[1],
-                            name: commentArr[2]
-                        }
-                    })
-                    .then(function(response) {
-                        console.log("response from post submit: ", response);
-                        self.comment = response.data[0];
-                    })
-                    .catch(function(error) {
-                        console.log("error in post submit: ", error);
-                    });
             },
             closeModal: function() {
                 console.log("closemodal je dosao do mene");

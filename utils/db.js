@@ -24,6 +24,7 @@ module.exports.getImage = id => {
         ) AS "previousId", (
             SELECT id FROM images
             WHERE images.id < $1
+            ORDER BY id DESC
             LIMIT 1
         ) AS "nextId"
         FROM images
@@ -56,8 +57,10 @@ module.exports.nextImages = lastId => {
 };
 
 module.exports.deleteImage = id => {
-    const q = `DELETE FROM images
-    WHERE id=$1`;
+    const q = `
+    DELETE FROM images
+    WHERE id=$1
+    `;
     const params = [id];
     return db.query(q, params);
 };

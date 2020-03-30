@@ -40,10 +40,10 @@
     
     <img-modal v-if="id" 
     v-bind:id="id"
-    @submitted="submitComment"
     @close="closeModal"
     @del="deleteImage"
     ></img-modal>
+    <!-- @submitted="submitComment" -->
     
     <div id="more">
     <button v-if="more" @click="moreClick" class="black-border second botun more">More</button>
@@ -60,7 +60,7 @@
         <div class="modal-box-cont">
             <div class="modal-img-cont">
                 <div class="title">{{title}}</div>
-                <p class="img-upload"> Uploaded by {{username}} on {{timestamp}}. </p>
+                <p class="img-upload"> Uploaded by {{username}} on {{new Date(timestamp).toLocaleString()}}. </p>
                 <div class="img-arr"><div v-if="previousId" class="arrows" @click="previous"><</div>
                 <img class="image" :src="url" v-bind:id="id">
                 <div v-if="nextId" class="arrows" @click="next">></div></div>
@@ -76,21 +76,18 @@
 
 
                 <form id="comment-form">
-                    <p>Comment</p>
-                    <input v-model="comment" type="text" name="comment" >
-                    <p>Username</p>
-                    <input v-model="name" type="text" name="name" >
-                    <button @click="submitted">Leave Comment</button>
+                    <p>Comment:</p>
+                    <input class="black-border" v-model="comment" type="text" name="comment" placeholder="Say something...">
+                    <p>Username:</p>
+                    <input class="black-border" v-model="name" type="text" name="name" >
+                    <button class="black-border botun" @click="submitted">Leave Comment</button>
                     
                 </form>
-                
-                <div class="comments" v-for="comment in comments" >
-                    <p>Comment bla bla by {{name}} on </p>
-                    <p>{{comment}}</p>
+                <div id="comments">
+                <div class="comments" v-for="comment in comments" v-if="show">
+                    <div class="whowhen">On {{new Date(comment.comment_time).toLocaleString()}} {{comment.name}} commented: </div>
+                    <div class="komentar">{{comment.comment}}</div>
                 </div>
-                <div class="comments" v-if="comment">
-                    <p>Comment by {{name}} on </p>
-                    <p>{{comment}}</p>
                 </div>
         </div>    
     </div>

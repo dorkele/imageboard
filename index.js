@@ -30,7 +30,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 let images = [];
-let comments = [];
 
 app.get("/images", (req, res) => {
     console.log("/images route has been hit");
@@ -48,7 +47,7 @@ app.get("/images", (req, res) => {
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     console.log("file: ", req.file);
     console.log("req.body: ", req.body);
-    //insert a row in the images table for the new image
+
     let imageUrl = conf.s3Url + req.file.filename;
     let title = req.body.title;
     let description = req.body.description;
@@ -94,7 +93,6 @@ app.post("/submit", (req, res) => {
         .then(response => {
             console.log("response in post comment submit: ", response.rows);
 
-            /////ovdje negdje cu morati res.json odradivati
             console.log("kometar je u tablici");
             res.json(response.rows);
         })
