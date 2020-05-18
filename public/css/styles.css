@@ -173,7 +173,7 @@ a {
 .modal-box-cont {
     position: fixed;
     max-height: 80%;
-    max-width: 80%;
+    max-width: 65%;
     width: -webkit-max-content;
     height: -webkit-max-content;
     display: flex;
@@ -182,9 +182,22 @@ a {
 
 .image {
     max-width: 100%;
-    max-height: 100%;
-    flex-shrink: 3;
-    object-fit: none;
+    height: 100%;
+}
+
+.image-layer {
+    position: relative;
+    max-width: 70%;
+    width: auto;
+}
+
+.descript-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .img-arr {
@@ -197,6 +210,9 @@ a {
 .title {
     padding-top: 20px;
     font-size: 40px;
+    color: white;
+    background-color: transparent;
+    text-align: center;
 }
 
 .arrows {
@@ -221,6 +237,9 @@ a {
 
 .img-upload {
     font-size: 12px;
+    color: white;
+    background-color: transparent;
+    text-align: center;
 }
 
 .icons {
@@ -232,42 +251,49 @@ a {
 }
 
 #delete {
-    height: 20px;
+    height: 40px;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .description {
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
 #description {
-    width: 500px;
     text-align: center;
+    color: white;
+    background-color: transparent;
 }
 
 #comment-form {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding-bottom: 20px;
-    align-self: self-end;
+    justify-self: flex-end;
 }
 
 .comments {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding-bottom: 20px;
+    margin-top: 5%;
+    justify-self: flex-start;
 }
 
 #comments {
-    width: 400px;
+    max-height: 100%;
+    width: 300px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     overflow-y: scroll;
+    justify-self: flex-end;
 }
 
 .who {
@@ -281,7 +307,23 @@ a {
 }
 
 .komentar {
-    align-self: center;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.style-2::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+.style-2::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f5f5f5;
+}
+
+.style-2::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #000000;
 }
 
 footer {

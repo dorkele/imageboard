@@ -59,8 +59,16 @@
         <div class="img-arr">
         <div v-if="previousId" class="arrows" id="left-arr" @click="previous"><</div>
         <div class="modal-box-cont">
-            <img class="image" :src="url" v-bind:id="id">
-            <div id="comments">
+            <div class="image-layer" @mouseover="hover = true" @mouseleave="hover = false">
+            <img class="image" :src="url" v-bind:id="id" >
+            <div v-if="hover" class="descript-layer">
+                <div class="title">{{title}}</div>
+                <p class="img-upload"> Uploaded by {{username}} on {{new Date(timestamp).toLocaleString()}}. </p>
+                <p id="description">{{description}}</p>
+                <img @click="del" id="delete" src="delete.png">            
+            </div>
+            </div>
+            <div id="comments" class="style-2">
                     <div class="comments" v-for="comment in comments" v-if="show">
                         <div class="who"> <strong>{{comment.name}}</strong> commented: </div>
                         <div class="komentar">{{comment.comment}}</div>
@@ -69,38 +77,12 @@
                      <form id="comment-form">
                          <input class="black-border" v-model="name" type="text" name="name" placeholder="username" >
                         <input class="black-border" v-model="comment" type="text" name="comment" placeholder="Leave comment">
-                        <button class="black-border botun" @click="submitted">Comment</button>
-                        
+                        <button class="black-border botun" @click="submitted">Comment</button> 
                     </form> 
             </div>
         </div>
         <div v-if="nextId" class="arrows" id="right-arr" @click="next">></div></div>
-        </div>
-            
-            <!-- <div class="title">{{title}}</div>
-            <p class="img-upload"> Uploaded by {{username}} on {{new Date(timestamp).toLocaleString()}}. </p>
-            <p id="description">{{description}}</p>
-                <!--  -->
-              
-            <!-- </div> -->
-                <!-- <div class="icons">
-                    <p ><img @click="count++" id="wave-emoji" src="wave-emoji.png"> {{count}}</p>
-                    <img @click="del" id="delete" src="delete.png">
-                </div>  -->
-                <!-- <div class="description"> -->
-                
-                <!-- /div> -->
-            <!-- </div>     -->
-                    <!-- <form id="comment-form">
-                        <p>Comment:</p>
-                        <input class="black-border" v-model="comment" type="text" name="comment" placeholder="Say something...">
-                        <p>Username:</p>
-                        <input class="black-border" v-model="name" type="text" name="name" >
-                        <button class="black-border botun" @click="submitted">Leave Comment</button>
-                        
-                    </form> --> 
-                    
-                    
+        </div>                    
     </div>
     
 </script>
