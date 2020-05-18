@@ -16,6 +16,7 @@ Vue.component("img-modal", {
             name: "",
             comment_time: "",
             show: false,
+            hover: false,
         };
     },
     mounted: function () {
@@ -101,18 +102,12 @@ Vue.component("img-modal", {
             this.$emit("del", id);
         },
         next: function () {
-            console.log("i clicked next");
             this.comments = [];
             location.hash = this.nextId;
-            console.log("this u next: ", self);
         },
         previous: function () {
-            console.log("i clicked previous");
             this.comments = [];
             location.hash = this.previousId;
         },
-        // count: function() {
-        //     self.count++;
-        // }
     },
 });
