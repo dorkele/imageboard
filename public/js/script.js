@@ -1,6 +1,4 @@
-// console.log("i am linked");
-
-(function() {
+(function () {
     new Vue({
         el: "#main",
         data: {
@@ -10,80 +8,58 @@
             description: "",
             username: "",
             file: null,
-            more: "here"
+            more: "here",
         },
-        mounted: function() {
+        mounted: function () {
             var self = this;
-            axios.get("/images").then(function(response) {
-                console.log("response.data: ", response);
-
+            axios.get("/images").then(function (response) {
                 self.images = response.data;
             });
-            console.log("location.hash: ", location.hash.slice(1));
-            window.addEventListener("hashchange", function() {
-                console.log("location.hash: ", location.hash);
+            window.addEventListener("hashchange", function () {
+                window.scrollTo(0, 0);
                 self.id = location.hash.slice(1);
-                console.log("self.id: ", self.id);
             });
         },
         methods: {
-            handleClick: function(e) {
+            handleClick: function (e) {
                 e.preventDefault();
-                console.log("this: ", this);
                 var self = this;
                 var formData = new FormData();
-                //formData shows empty object when console.logged - weird behaviour
                 formData.append("title", this.title);
                 formData.append("description", this.description);
                 formData.append("username", this.username);
                 formData.append("file", this.file);
                 axios
                     .post("/upload", formData)
-                    .then(function(response) {
-                        console.log("response from post upload. ", response);
-                        console.log("self.images: ", self.images);
+                    .then(function (response) {
                         self.images.unshift(response.data[0][0]);
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         console.log("error in post upload: ", error);
                     });
-                console.log(e);
-                e.target.form.reset();
+                this.title = "";
+                this.description = "";
+                this.username = "";
+                this.file = "";
             },
-            handleChange: function(e) {
-                console.log("handleChange is running");
-                console.log("file: ", e.target.files[0]);
+            handleChange: function (e) {
                 this.file = e.target.files[0];
             },
-            closeModal: function() {
-                console.log("closemodal je dosao do mene");
+            closeModal: function () {
                 location.hash = "";
             },
-            moreClick: function() {
-                console.log("more button was clicked");
-                console.log("self.images: ", this.images);
+            moreClick: function () {
                 var self = this;
                 var i = self.images.length - 1;
-                var lastId = self.images[i].id;
-
-                console.log("last.id: ", lastId);
                 axios
                     .get("/next", {
                         params: {
-                            lastId: self.images[i].id
-                        }
+                            lastId: self.images[i].id,
+                        },
                     })
-                    .then(function(response) {
-                        console.log("response in next: ", response.data);
+                    .then(function (response) {
                         for (var i = 0; i < response.data.length; i++) {
                             self.images.push(response.data[i]);
-                            console.log("more related: ", response.data[i].id);
-                            console.log(
-                                "other more related: ",
-                                response.data[0].lastId
-                            );
-
-                            lastId = response.data[0].lastId;
                             if (
                                 response.data[i].lastId == response.data[i].id
                             ) {
@@ -91,20 +67,20 @@
                             }
                         }
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         console.log("error in next: ", error);
                     });
             },
-            deleteImage: function(id) {
+            deleteImage: function (id) {
                 console.log("tu sam u delete image i gledam imam li id: ", id);
                 var self = this;
                 axios
                     .delete("/image", {
                         data: {
-                            id: id
-                        }
+                            id: id,
+                        },
                     })
-                    .then(function() {
+                    .then(function () {
                         console.log("image should be deleted: ");
                         location.hash = "";
                         console.log("images array: ", self.images);
@@ -114,10 +90,10 @@
                             }
                         }
                     })
-                    .catch(function(error) {
+                    .catch(function (error) {
                         console.log(error);
                     });
-            }
-        }
+            },
+        },
     });
 })();
