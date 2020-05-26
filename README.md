@@ -24,10 +24,6 @@ They can leave comments and delete pictures.
 -   PostgreSQL
 -   AWS S3
 
-## Explore on your own
-
-...
-
 ## Future Features
 
 -   Tags
